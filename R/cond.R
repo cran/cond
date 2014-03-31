@@ -1,6 +1,6 @@
-## file cond/R/cond.R, v 1.2-1 2011/11/23
+## file cond/R/cond.R, v 1.2-2 2014-03-31
 ##
-##  Copyright (C) 2000-2011 Alessandra R. Brazzale 
+##  Copyright (C) 2000-2014 Alessandra R. Brazzale 
 ##
 ##  This file is part of the "cond" package for R.  This program is 
 ##  free software; you can redistribute it and/or modify it under the 
@@ -66,7 +66,7 @@ cond.glm <- function(object, offset, formula = NULL, family = NULL,
   is.scalar <- (dim(model.matrix(object))[2] == 1)
   offsetName <- if(!is.character(m$offset)) deparse(m$offset,
                                                     width.cutoff = 500)
-                else m$offset
+                else m$offset                
   .offsetName <- offsetName   
   if((offsetName == "1") && (attr(Terms, "intercept") == 0))
     stop(paste("Invalid argument for \"offset\": intercept not included in original model"))
@@ -116,9 +116,10 @@ cond.glm <- function(object, offset, formula = NULL, family = NULL,
                     .offset <- off.tmp
                   }
                 }
-              })
-  assign(".offset", .offset, pos=1)		
-  on.exit(remove(".offset", pos=1), add=TRUE)
+              })              
+#  assign(".offset", .offset, envir=sys.frame())
+#  assign(".offset", .offset, pos=1)		## 20.05.13
+#  on.exit(remove(".offset", pos=1), add=TRUE)
   if(!missing(pts) && (pts < 0))
     stop("Invalid argument: negative values not allowed for \"pts\"")
   else if(pts < 10)
@@ -153,13 +154,14 @@ cond.glm <- function(object, offset, formula = NULL, family = NULL,
   glmCDev <- vector("numeric", lengthOC)
   if(!is.scalar)
     glmCDet <- glmCDev
-  if( (length(attr(Terms, "term.labels")) == 0) &&
-      !is.null(attr(Terms, "offset")) )
-  {
-    ..offset <- modOff <- model.offset(model.frame(object))
-    assign("..offset", ..offset, pos=1)
-    on.exit(remove("..offset", pos=1), add=TRUE)
-  }
+#  if( (length(attr(Terms, "term.labels")) == 0) &&
+#      !is.null(attr(Terms, "offset")) )
+#  {
+#    ..offset <- modOff <- model.offset(model.frame(object))
+##    assign("..offset", ..offset, envir=sys.frame())
+##    assign("..offset", ..offset, pos=1)		## 20.05.13
+##    on.exit(remove("..offset", pos=1), add=TRUE)
+#  }
   for(i in seq(along = offsetCoef))
   {
     if(trace) 
@@ -171,43 +173,69 @@ cond.glm <- function(object, offset, formula = NULL, family = NULL,
     .object <- object$call
     .object$formula <- formula
     switch(offsetName, 
-           "1"     = { 
-                       if( (length(attr(Terms, "term.labels")) == 0) &&
-                           !is.null(attr(Terms, "offset")) )
-                       {
-                         ..offset <- modOff + offsetCoef[i]*.offset
-                         assign("..offset", ..offset, pos=1)		
-                         nf <- as.formula(
-                                 paste(deparse(formula(object)[[2]],
-                                               width.cutoff = 500), 
-                                       " ~ -1 + offset(..offset)",
-                                       collapse = ""))
-                         .object$formula <- nf
-                         environment(.object$formula) <- 
-                                  environment(object$formula)
-                       }
-                       else
-                       {
-                         nf <- as.formula(
-                                 paste(deparse(formula(object), 
-                                               width.cutoff = 500), 
-                                       "-1 + offset(", offsetCoef[i], 
-                                       "*.offset)", collapse = ""))
-                         .object$formula <- nf
-                         environment(.object$formula) <- 
-                                  environment(object$formula)
-                       }
-                     },
-           { 
-             nf <- as.formula(paste(".~.-", .offsetName))
-             nf <- update(.object$formula, nf)
-             nf <- as.formula(paste(deparse(nf, width.cutoff = 500), 
-                                    "+ offset(", offsetCoef[i], 
-                                    "* .offset)", collapse = ""))
-             .object$formula <- nf
-             environment(.object$formula) <- 
-                                  environment(object$formula)
-           })
+           "1"     = { nf <- as.formula(".~. -1") },
+                     { nf <- as.formula(paste(".~.-", .offsetName)) } )               
+    nf <- update(.object$formula, nf)   
+    .object$formula <- nf
+    if(!is.null(.object$offset))
+      .object$offset <- object$offset + offsetCoef[i]*.offset
+    else
+      .object$offset <- offsetCoef[i]*.offset  
+    environment(.object$formula) <- 
+      environment(object$formula)             
+#    switch(offsetName, 
+#           "1"     = { 
+#                       if( (length(attr(Terms, "term.labels")) == 0) &&
+#                           !is.null(attr(Terms, "offset")) )
+#                       {
+#                         ..offset <- modOff + offsetCoef[i]*.offset
+#                          nf <- as.formula(".~. -1")
+#                          nf <- update(.object$formula, nf)
+##                         assign("..offset", ..offset, envir=sys.frame())
+##                         assign("..offset", ..offset, pos=1)		## 20.05.13		
+##                         nf <- as.formula(
+##                                 paste(deparse(formula(object)[[2]],
+##                                               width.cutoff = 500), 
+##                                       " ~ -1 + offset(..offset)",
+##                                       collapse = ""))
+#                         .object$formula <- nf
+#                         .object$offset <- ..offset
+#                         environment(.object$formula) <- 
+#                                  environment(object$formula)
+#                       }
+#                       else
+#                       {
+##                         nf <- as.formula(
+##                                 paste(deparse(formula(object), 
+##                                               width.cutoff = 500), 
+##                                       "-1 + offset(", offsetCoef[i], 
+##                                       "*.offset)", collapse = ""))
+#                          nf <- as.formula(".~. -1")
+#                          nf <- update(.object$formula, nf)
+#                          .object$formula <- nf
+#                          if(!is.null(.object$offset))
+#                            .object$offset <- object$offset +   
+#                                                offsetCoef[i]*.offset
+#                          else
+#                            .object$offset <- offsetCoef[i]*.offset  
+#                          environment(.object$formula) <- 
+#                                   environment(object$formula)
+#                       }
+#                     },
+#           { 
+#             nf <- as.formula(paste(".~.-", .offsetName))
+#             nf <- update(.object$formula, nf)
+##             nf <- as.formula(paste(deparse(nf, width.cutoff = 500), 
+##                                    "+ offset(", offsetCoef[i], 
+##                                    "* .offset)", collapse = ""))
+#             .object$formula <- nf
+#             if(!is.null(.object$offset))
+#               .object$offset <- object$offset + offsetCoef[i]*.offset
+#             else
+#               .object$offset <- offsetCoef[i]*.offset  
+#             environment(.object$formula) <- 
+#                                  environment(object$formula)
+#           })          
     .object <- eval(.object)
     summary.obj <- summary(.object)
     glmCDev[i] <- deviance(.object)
@@ -761,7 +789,7 @@ plot.cond <- function(x = stop("nothing to plot"), from = x.axis[1],
 
            }
 ##               ---------------
-                        invisible(close.screen(all=TRUE))
+                        invisible(close.screen(all.screens=TRUE))
                         par(ask=TRUE)
                         invisible(split.screen(figs=c(2,2)))
 ##               ---------------
@@ -976,11 +1004,11 @@ plot.cond <- function(x = stop("nothing to plot"), from = x.axis[1],
                      cex=cex, ...)               
            }
 ##               ---------------
-			invisible(close.screen(all=TRUE))
+			invisible(close.screen(all.screens=TRUE))
                         par(ask=TRUE)
                         par(pty="s")
-                        if(is.scalar) split.screen(fig=c(1,2))
-                        else split.screen(fig=c(2,2))
+                        if(is.scalar) split.screen(figs=c(1,2))
+                        else split.screen(figs=c(2,2))
 ##               ---------------
            screen(1)
            plot(inf, type="l", xlab="", ylab="", lty=lty1, 
@@ -1020,7 +1048,7 @@ plot.cond <- function(x = stop("nothing to plot"), from = x.axis[1],
                      main="NP correction term", ...)
            }
 ##               ---------------
-                        close.screen(all=TRUE)
+                        close.screen(all.screens=TRUE)
                         par(pty="m")
                         par(ask=FALSE)
 		}
@@ -1392,8 +1420,8 @@ plot.cond <- function(x = stop("nothing to plot"), from = x.axis[1],
                 },
                 "8"={
                         par(pty="s")
-                        if(is.scalar) split.screen(fig=c(1,2))
-                        else split.screen(fig=c(2,2))
+                        if(is.scalar) split.screen(figs=c(1,2))
+                        else split.screen(figs=c(2,2))
 ##               ---------------
            screen(1)
            plot(inf, type="l", xlab="", ylab="", lty=lty1, 
@@ -1433,7 +1461,7 @@ plot.cond <- function(x = stop("nothing to plot"), from = x.axis[1],
                      main="NP correction term", ...)
            }
 ##               ---------------
-                close.screen(all=TRUE)
+                close.screen(all.screens=TRUE)
                 par(pty="m")
                 })
     if( missing(which) )
@@ -1441,7 +1469,7 @@ plot.cond <- function(x = stop("nothing to plot"), from = x.axis[1],
                    title="\n Make a plot selection (or 0 to exit)\n")
     if( (pick == 0) || !missing(which) )
     {
-      invisible(close.screen(all=TRUE))
+      invisible(close.screen(all.screens=TRUE))
       break
     }
   }

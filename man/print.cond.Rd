@@ -10,11 +10,8 @@
   this function and for the interpretation of \code{digits}.
 }
 \usage{
-\method{print}{cond}(x, digits = value, \dots)
-}
-\synopsis{
-\method{print}{cond}(x, digits=max(3, getOption("digits")-3), ...)
-}
+\method{print}{cond}(x, digits=max(3, getOption("digits")-3), \dots)
+\method{print}{cond}(x, digits, \dots)}
 \seealso{
   \code{\link{cond.object}}, \code{\link[base]{print}}, \code{\link[base]{print.default}}
 }

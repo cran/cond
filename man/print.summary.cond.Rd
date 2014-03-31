@@ -11,14 +11,10 @@
   interpretation of \code{digits}.  
 }
 \usage{
+\method{print}{summary.cond}(x, all = x$all, Coef = x$cf, int = x$int, test = x$hyp,
+      digits = if(!is.null(x$digits)) x$digits else max(3, getOption("digits")-3), 
+      \dots)
 \method{print}{summary.cond}(x, all, Coef, int, test, digits, \dots)
-}
-\synopsis{
-print.summary.cond(x, all = x$all, Coef = x$cf,
-                   int = x$int, test = x$hyp,
-                   digits = if(!is.null(x$digits)) x$digits
-                              else max(3, getOption("digits")-3),
-                   ...)
 }
 \arguments{
   \item{x}{
