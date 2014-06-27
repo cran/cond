@@ -1,4 +1,4 @@
-## file cond/R/cond.R, v 1.2-2 2014-03-31
+## file cond/R/cond.R, v 1.2-3 2014-06-27
 ##
 ##  Copyright (C) 2000-2014 Alessandra R. Brazzale 
 ##

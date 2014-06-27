@@ -1,6 +1,6 @@
 Package: cond
-Version: 1.2-2
-Date: 2014-03-31
+Version: 1.2-3
+Date: 2014-06-27
 Title: Approximate conditional inference for logistic and loglinear
         models
 Author: S original by Alessandra R. Brazzale <alessandra.brazzale@unipd.it>.
@@ -15,7 +15,7 @@ License: GPL (>= 2) | file LICENCE
 URL: http://www.r-project.org, http://statwww.epfl.ch/AA/
 LazyLoad: yes
 LazyData: yes
-Packaged: 2014-04-03 08:26:33 UTC; brazzale
+Packaged: 2014-06-27 14:44:45 UTC; brazzale
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-04-03 14:00:45
+Date/Publication: 2014-06-27 18:40:35

@@ -27,17 +27,17 @@
     \item{\code{r2}}{
       the total number of automobile insurance claims;
     }
-    \item{\code{AC1,AC9,AC16}}{
+    \item{\code{AC1},\code{AC9},\code{AC16}}{
       potential fraud characteristics pertaining to \dQuote{Accident}.  
       The presence of the fraud characteristic is indicated by a 1, the 
       absence is indicated by a 0.
     }
-    \item{\code{CL7,CL11}}{
+    \item{\code{CL7},\code{CL11}}{
       potential fraud characteristics pertaining to \dQuote{Claimer}.  
       The presence of the fraud characteristic is indicated by a 1, the 
       absence is indicated by a 0.
     }
-    \item{\code{IJ2,IJ3,IJ4,IJ6,IJ12}}{
+    \item{\code{IJ2},\code{IJ3},\code{IJ4},\code{IJ6},\code{IJ12}}{
       potential fraud characteristics pertaining to \dQuote{Injury}.  
       The presence of the fraud characteristic is indicated by a 1, the 
       absence is indicated by a 0.

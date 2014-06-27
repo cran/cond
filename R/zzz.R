@@ -1,6 +1,6 @@
 .onAttach <- function(libname, pkgname) 
 {
-  version <- as.character("1.2-2 (2014-03-31)")
+  version <- as.character("1.2-3 (2014-06-27)")
   psm <- paste("\n   Package \"cond\"", version, "\n", 
     "   Copyright (C) 2000-2014 A. R. Brazzale\n\n",
     "This is free software, and you are welcome to redistribute\n",
