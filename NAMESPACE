@@ -9,3 +9,21 @@ import(
   statmod,
   survival
 )
+
+importFrom("graphics", "abline", "close.screen", "legend", "lines",
+           "locator", "matplot", "par", "plot", "points", "screen",
+           "segments", "split.screen", "text", "title")
+importFrom("stats", "as.formula", "contrasts", "deviance", "dnorm",
+           "family", "glm.control", "is.empty.model", "lm.fit",
+           "model.frame.default", "model.matrix", "model.response",
+           "pnorm", "predict", "qchisq", "qnorm", "smooth.spline",
+           "spline", "update")
+importFrom("utils", "menu")
+
+S3method(cond, glm)
+S3method(family, cond)
+S3method(family, summary.cond)
+S3method(plot, cond)
+S3method(print, cond)
+S3method(print, summary.cond)
+S3method(summary, cond)
