@@ -32,7 +32,7 @@
   The data were obtained from
  
   Cox, D. R. (1970) \emph{Analysis of Binary Data} (page 61).  London:
-  Chapman \& Hall.
+  Chapman & Hall.
 }
 \references{
   Davison, A. C. (1988) Approximate conditional inference in 

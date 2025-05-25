@@ -26,7 +26,7 @@
   }
   \item{all}{
     logical value; if \code{TRUE}, all the information stored in the 
-    \code{summary.cond} object is printed, else only a subset of it.  
+    \code{summaryCond} object is printed, else only a subset of it.  
     The default is \code{FALSE}.
   }
   \item{coef}{
@@ -100,7 +100,7 @@
   }
   \item{all}{
     logical value; if \code{TRUE}, all the information stored in the 
-    \code{summary.cond} object is printed.
+    \code{summaryCond} object is printed.
   }
   \item{cf}{
     logical value; if \code{TRUE}, the unconditional and conditional 

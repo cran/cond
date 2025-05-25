@@ -13,12 +13,12 @@ loglinear models
 \details{
 \tabular{ll}{
 Package: \tab cond\cr
-Version: \tab 1.2-0\cr
-Date: \tab 2009-10-03\cr
-Depends: \tab R (>= 2.6.0), statmod, survival\cr
+Version: \tab 1.2-4\cr
+Date: \tab 2025-05-22\cr
+Depends: \tab R (>= 3.0.0), statmod, survival\cr
 Suggests: \tab csampling, marg, nlreg\cr
 License: \tab GPL (>= 2)\cr
-URL: \tab http://www.r-project.org, http://statwww.epfl.ch/AA/\cr
+URL: \tab http://www.r-project.org\cr
 LazyLoad: \tab yes\cr
 LazyData: \tab yes\cr
 }
@@ -33,10 +33,10 @@ cond.glm                Approximate Conditional Inference for Logistic
                         and Loglinear Models
 cond.object             Approximate Conditional Inference Object
 family.cond             Use family() on a "cond" object
-family.summary.cond     Use family() on a "summary.cond" object
+family.summaryCond      Use family() on a "summary.cond" object
 plot.cond               Generate Plots for an Approximate Conditional
                         Inference Object
-print.summary.cond      Use print() on a "summary.cond" object
+print.summaryCond       Use print() on a "summary.cond" object
 summary.cond            Summary Method for Objects of Class "cond"
 
 
@@ -58,10 +58,10 @@ Further information is available in the following vignettes:
 }
 }
 \author{
-S original by Alessandra R. Brazzale <alessandra.brazzale@unimore.it>.
-R port by Alessandra R. Brazzale <alessandra.brazzale@unimore.it>, following 
+S original by Alessandra R. Brazzale <alessandra.brazzale@unipd.it>.
+R port by Alessandra R. Brazzale <alessandra.brazzale@unipd.it>, following 
 earlier work by Douglas Bates.
 
-Maintainer: Alessandra R. Brazzale <alessandra.brazzale@unimore.it>
+Maintainer: Alessandra R. Brazzale <alessandra.brazzale@unipd.it>
 }
 \keyword{ package }

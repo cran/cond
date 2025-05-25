@@ -1,6 +1,6 @@
-## file cond/R/cond.R, v 1.2-3 2014-06-27
+## file cond/R/cond.R, v 1.2-4 2025-05-22
 ##
-##  Copyright (C) 2000-2014 Alessandra R. Brazzale 
+##  Copyright (C) 2000-2025 Alessandra R. Brazzale 
 ##
 ##  This file is part of the "cond" package for R.  This program is 
 ##  free software; you can redistribute it and/or modify it under the 
@@ -23,7 +23,7 @@
 ##  Alessandra R. Brazzale, Department of Statistics, University of 
 ##  Padova, Via C. Battisti 241/243, 35121 Padova (PD), Italy.
 ##  Email: alessandra.brazzale@unipd.it  
-##  Web: http://www.stat.unipd/~brazzale
+##  Web: https://homes.stat.unipd.it/alessandrarosalbabrazzale/
 
 cond <- function(object, offset, ...)  UseMethod("cond")
 
@@ -581,7 +581,8 @@ summary.cond <- function(object, alpha = 0.05, test = NULL,
                           n.approx = object$n.approx,
                           all = all, cf = coef, int = int,
                           is.scalar = is.scalar, digits = digits )
-  class(summary.object) <- "summary.cond"
+#  class(summary.object) <- "summary.cond"
+  class(summary.object) <- "summaryCond"
   summary.object
 }
 
@@ -1477,7 +1478,8 @@ plot.cond <- function(x = stop("nothing to plot"), from = x.axis[1],
 
 family.cond <- function(object, ...) object$family
 
-family.summary.cond <- function(object, ...) object$family
+#family.summary.cond <- function(object, ...) object$family
+family.summaryCond <- function(object, ...) object$family
 
 print.cond <- function(x, digits = max(3, getOption("digits")-3), ...)
 {
@@ -1507,7 +1509,8 @@ print.cond <- function(x, digits = max(3, getOption("digits")-3), ...)
   cat("\n Approximation based on", x$n.approx, "points\n")
 }
 
-print.summary.cond <- function(x, all = x$all, Coef = x$cf, 
+#print.summary.cond <- function(x, all = x$all, Coef = x$cf, 
+print.summaryCond <- function(x, all = x$all, Coef = x$cf, 
                                int = x$int, test = x$hyp,
                                digits = if(!is.null(x$digits)) x$digits
                                         else max(3, getOption("digits")-3),

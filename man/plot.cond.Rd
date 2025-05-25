@@ -153,6 +153,7 @@ babies.cond <- cond(object = babies.glm, offset = lullyes)
 plot(babies.cond)
 }
 
+
 ## Urine Data 
 data(urine)
 urine.glm <- glm(r ~ I(gravity * 100) + ph + osmo + conduct + urea + calc, 

@@ -1,16 +1,16 @@
-\name{family.summary.cond}
-\alias{family.summary.cond}
+\name{family.summaryCond}
+\alias{family.summaryCond}
 \title{
-  Use family() on a ``summary.cond'' object
+  Use family() on a ``summaryCond'' object
 }
 \description{
   This is a method for the function \code{family()} for objects 
-  inheriting from class \code{summary.cond}.  See 
+  inheriting from class \code{summaryCond}.  See 
   \code{\link[stats]{family}} for the general behaviour of this 
   function.
 }
 \usage{
-\method{family}{summary.cond}(object, \dots)
+\method{family}{summaryCond}(object, \dots)
 }
 \arguments{
   \item{object}{

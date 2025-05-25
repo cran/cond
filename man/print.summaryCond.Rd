@@ -1,29 +1,29 @@
-\name{print.summary.cond}
-\alias{print.summary.cond}
+\name{print.summaryCond}
+\alias{print.summaryCond}
 \title{
-  Use print() on a ``summary.cond'' object
+  Use print() on a ``summaryCond'' object
 }
 \description{
   This is a method for the function \code{print()} for objects 
-  inheriting from class \code{summary.cond}.  See 
+  inheriting from class \code{summaryCond}.  See 
   \code{\link[base]{print}} and \code{\link[base]{print.default}}
   for the general  behaviour of this function and for the 
   interpretation of \code{digits}.  
 }
 \usage{
-\method{print}{summary.cond}(x, all = x$all, Coef = x$cf, int = x$int, test = x$hyp,
+\method{print}{summaryCond}(x, all = x$all, Coef = x$cf, int = x$int, test = x$hyp,
       digits = if(!is.null(x$digits)) x$digits else max(3, getOption("digits")-3), 
       \dots)
-\method{print}{summary.cond}(x, all, Coef, int, test, digits, \dots)
+\method{print}{summaryCond}(x, all, Coef, int, test, digits, \dots)
 }
 \arguments{
   \item{x}{
-    a \code{summary.cond} object.  This is assumed to be the result 
+    a \code{summaryCond} object.  This is assumed to be the result 
     returned by the \code{summary.cond} function.
   }
   \item{all}{
     if \code{TRUE} all the information stored in the 
-    \code{summary.cond} object is printed, else only a subset of it.  
+    \code{summaryCond} object is printed, else only a subset of it.  
     The default is \code{FALSE}.
   }
   \item{Coef}{
@@ -49,7 +49,7 @@
 \details{
   Changing the default values of \code{all}, \code{Coef}, \code{int} 
   and \code{test} allows only a subset of the information in the 
-  \code{summary.cond} object to be printed.  With \code{all = FALSE},
+  \code{summaryCond} object to be printed.  With \code{all = FALSE},
   one-sided confidence intervals and the Lugannani-Rice tail
   approximations are omitted.  See \code{\link{summary.cond}} for more
   details.
